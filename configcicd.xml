@@ -18,17 +18,17 @@
     stages {
         stage(&apos;Checkout&apos;) {
             steps {
-                git url: &apos;https://github.com/dreadnone/sdvps-materials.git&apos; // Указывай свой форк
+                git url: &apos;https://github.com/dreadnone/sdvps-materials.git&apos; 
             }
         }
         stage(&apos;Test&apos;) {
             steps {
-                sh &apos;/usr/bin/go test ./...&apos; // Рекурсивное тестирование всех пакетов
+                sh &apos;/usr/bin/go test ./...&apos; 
             }
         }
         stage(&apos;Build&apos;) {
             steps {
-                sh &apos;CGO_ENABLED=0 GOOS=linux GOARCH=amd64 /usr/bin/go build -o app&apos; // Собираем исполняемый файл
+                sh &apos;CGO_ENABLED=0 GOOS=linux GOARCH=amd64 /usr/bin/go build -o app&apos; 
             }
         }
         stage(&apos;push&apos;) {
