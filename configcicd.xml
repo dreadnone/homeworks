@@ -1,0 +1,51 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@1508.v9cb_c3a_a_89dfd">
+  <actions>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@2.2247.va_423189a_7dff"/>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@2.2247.va_423189a_7dff">
+      <jobProperties/>
+      <triggers/>
+      <parameters/>
+      <options/>
+    </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
+  </actions>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@4080.va_15b_44a_91525">
+    <script>pipeline {
+    agent any
+    stages {
+        stage(&apos;Checkout&apos;) {
+            steps {
+                git url: &apos;https://github.com/dreadnone/sdvps-materials.git&apos; // Указывай свой форк
+            }
+        }
+        stage(&apos;Test&apos;) {
+            steps {
+                sh &apos;/usr/bin/go test ./...&apos; // Рекурсивное тестирование всех пакетов
+            }
+        }
+        stage(&apos;Build&apos;) {
+            steps {
+                sh &apos;CGO_ENABLED=0 GOOS=linux GOARCH=amd64 /usr/bin/go build -o app&apos; // Собираем исполняемый файл
+            }
+        }
+        stage(&apos;push&apos;) {
+            steps {
+                withCredentials([usernamePassword(credentialsId: &apos;1&apos;, usernameVariable: &apos;admin&apos;, passwordVariable: &apos;admin&apos;)]) {
+                    sh &apos;&apos;&apos;
+                        curl -u admin:admin \
+                            http://localhost:8081/repository/raw-go/ \
+                            --upload-file app
+                    &apos;&apos;&apos;
+                }
+            }
+        }
+    }
+}</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
+</flow-definition>

@@ -1,0 +1,59 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@1508.v9cb_c3a_a_89dfd">
+  <actions>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@2.2247.va_423189a_7dff"/>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@2.2247.va_423189a_7dff">
+      <jobProperties/>
+      <triggers/>
+      <parameters/>
+      <options/>
+    </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
+  </actions>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@4080.va_15b_44a_91525">
+    <script>pipeline {
+    agent any
+
+    stages {
+        stage(&apos;Git Checkout&apos;) {
+            steps {
+                git url: &apos;https://github.com/dreadnone/sdvps-materials.git&apos;
+            }
+        }
+
+        stage(&apos;Test&apos;) {
+            steps {
+                sh &apos;/usr/bin/go test .&apos;
+            }
+        }
+
+        stage(&apos;Build Docker Image&apos;) {
+            steps {
+                dir(&apos;/home/andrew/sdvps-materials&apos;) {
+                    sh &quot;&quot;&quot;
+                        docker build . -t ubuntu-bionic:8082/hello-world:v${env.BUILD_NUMBER}
+                    &quot;&quot;&quot;
+                }
+            }
+        }
+
+        stage(&apos;Push Docker Image&apos;) {
+            steps {
+                dir(&apos;/home/andrew/sdvps-materials&apos;) {
+                    sh &quot;&quot;&quot;
+                        docker login ubuntu-bionic:8082 -u admin -p admin
+                        docker push ubuntu-bionic:8082/hello-world:v${env.BUILD_NUMBER}
+                        docker logout
+                    &quot;&quot;&quot;
+                }
+            }
+        }
+    }
+}</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
+</flow-definition>
