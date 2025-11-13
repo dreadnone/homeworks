@@ -86,7 +86,7 @@ See 'snap info docker' for additional versions.
 5. (Необязательная часть) Дополнительно настройте remote ssh context к вашему серверу. Отобразите список контекстов и результат удаленного выполнения ```docker ps -a```
 6. Повторите SQL-запрос на сервере и приложите скриншот и ссылку на fork.
 <img width="863" height="438" alt="Снимок экрана от 2025-11-13 22-01-35" src="https://github.com/user-attachments/assets/705dd3b6-b81c-42d7-9e58-3aa051f4e27b" />
-
+https://github.com/dreadnone/shvirtd-example-python
 
 ## Задача 5 (*)
 1. Напишите и задеплойте на вашу облачную ВМ bash скрипт, который произведет резервное копирование БД mysql в директорию "/opt/backup" с помощью запуска в сети "backend" контейнера из образа ```schnitzler/mysqldump``` при помощи ```docker run ...``` команды. Подсказка: "документация образа."
