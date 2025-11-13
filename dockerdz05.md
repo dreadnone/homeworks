@@ -36,7 +36,13 @@ See 'snap info docker' for additional versions.
    - Обязательно используйте конструкцию ```COPY . .``` в Dockerfile
    - Создайте `.dockerignore` файл для исключения ненужных файлов
    - Используйте ```CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "5000"]``` для запуска
-   - Протестируйте корректность сборки 
+   - Протестируйте корректность сборки
+  
+<img width="980" height="502" alt="Снимок экрана от 2025-11-13 18-05-19" src="https://github.com/user-attachments/assets/cbaa8562-4373-4f34-852c-5ffdca3a44a5" />
+
+<img width="835" height="149" alt="Снимок экрана от 2025-11-13 18-05-37" src="https://github.com/user-attachments/assets/8f1aef8c-1c37-4ecd-a415-5b62abe2ed92" />
+
+
 3. (Необязательная часть, *) Изучите инструкцию в проекте и запустите web-приложение без использования docker, с помощью venv. (Mysql БД можно запустить в docker run).
 4. (Необязательная часть, *) Изучите код приложения и добавьте управление названием таблицы через ENV переменную.
 ---
@@ -66,14 +72,21 @@ See 'snap info docker' for additional versions.
 5. Подключитесь к БД mysql с помощью команды ```docker exec -ti <имя_контейнера> mysql -uroot -p<пароль root-пользователя>```(обратите внимание что между ключем -u и логином root нет пробела. это важно!!! тоже самое с паролем) . Введите последовательно команды (не забываем в конце символ ; ): ```show databases; use <имя вашей базы данных(по-умолчанию example)>; show tables; SELECT * from requests LIMIT 10;```.
 
 6. Остановите проект. В качестве ответа приложите скриншот sql-запроса.
+<img width="863" height="438" alt="Снимок экрана от 2025-11-13 20-31-25" src="https://github.com/user-attachments/assets/cb2ce053-70f8-427e-97d4-0cd6be582d2e" />
+
 
 ## Задача 4
 1. Запустите в Yandex Cloud ВМ (вам хватит 2 Гб Ram).
 2. Подключитесь к Вм по ssh и установите docker.
 3. Напишите bash-скрипт, который скачает ваш fork-репозиторий в каталог /opt и запустит проект целиком.
 4. Зайдите на сайт проверки http подключений, например(или аналогичный): ```https://check-host.net/check-http``` и запустите проверку вашего сервиса ```http://<внешний_IP-адрес_вашей_ВМ>:8090```. Таким образом трафик будет направлен в ingress-proxy. Трафик должен пройти через цепочки: Пользователь → Internet → Nginx → HAProxy → FastAPI(запись в БД) → HAProxy → Nginx → Internet → Пользователь
+<img width="845" height="881" alt="Снимок экрана от 2025-11-13 22-06-31" src="https://github.com/user-attachments/assets/93a7e3f1-475e-4ed9-a5d3-13fb6fb0c151" />
+
+
 5. (Необязательная часть) Дополнительно настройте remote ssh context к вашему серверу. Отобразите список контекстов и результат удаленного выполнения ```docker ps -a```
 6. Повторите SQL-запрос на сервере и приложите скриншот и ссылку на fork.
+<img width="863" height="438" alt="Снимок экрана от 2025-11-13 22-01-35" src="https://github.com/user-attachments/assets/705dd3b6-b81c-42d7-9e58-3aa051f4e27b" />
+
 
 ## Задача 5 (*)
 1. Напишите и задеплойте на вашу облачную ВМ bash скрипт, который произведет резервное копирование БД mysql в директорию "/opt/backup" с помощью запуска в сети "backend" контейнера из образа ```schnitzler/mysqldump``` при помощи ```docker run ...``` команды. Подсказка: "документация образа."
@@ -84,10 +97,14 @@ See 'snap info docker' for additional versions.
 ## Задача 6
 Скачайте docker образ ```hashicorp/terraform:latest``` и скопируйте бинарный файл ```/bin/terraform``` на свою локальную машину, используя dive и docker save.
 Предоставьте скриншоты  действий .
+<img width="862" height="310" alt="Снимок экрана от 2025-11-14 01-03-29" src="https://github.com/user-attachments/assets/46c070f3-07ca-41e7-81b4-78371450f12c" />
+<img width="1673" height="898" alt="Снимок экрана от 2025-11-14 00-54-52" src="https://github.com/user-attachments/assets/3ac354e8-9462-4ba4-9786-4b1f1b40b9a4" />
+<img width="1011" height="364" alt="Снимок экрана от 2025-11-14 00-56-40" src="https://github.com/user-attachments/assets/ef5be1f8-704d-4e53-8452-2e3d1ddcaa38" />
 
 ## Задача 6.1
 Добейтесь аналогичного результата, используя docker cp.  
 Предоставьте скриншоты  действий .
+<img width="714" height="244" alt="Снимок экрана от 2025-11-13 23-31-49" src="https://github.com/user-attachments/assets/972333cc-4bd5-43f7-ae14-e5655dca7843" />
 
 ## Задача 6.2 (**)
 Предложите способ извлечь файл из контейнера, используя только команду docker build и любой Dockerfile.  
