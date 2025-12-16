@@ -42,7 +42,11 @@
 ### Как оформить решение задания
 
 Выполненное домашнее задание пришлите в виде ссылки на .md-файл в вашем репозитории.
+
 https://github.com/dreadnone/lighthouse-role
+
 https://github.com/dreadnone/vector-role
+
 https://github.com/dreadnone/ansible-playbook
+
 ---
