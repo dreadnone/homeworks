@@ -1,0 +1,15 @@
+# Secret files
+*.key
+*.crt
+*.csr
+tls-secret.yaml
+ca.key
+
+# Kubernetes sensitive
+*-secret.yaml
+*-credentials.yaml
+
+# Local files
+.DS_Store
+*.swp
+*.swo
