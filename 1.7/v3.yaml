@@ -1,0 +1,2 @@
+namespace: app2
+image: nginx:1.25-alpine
