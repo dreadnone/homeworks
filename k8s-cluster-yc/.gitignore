@@ -1,0 +1,40 @@
+# Terraform
+terraform/.terraform/
+terraform/.terraform.lock.hcl
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+terraform/*.tfvars
+!terraform/terraform.tfvars.example
+
+# Ansible
+ansible/inventory/hosts.ini
+ansible/*.retry
+ansible/group_vars/all.yml
+!ansible/group_vars/all.yml.example
+
+# Kubernetes configs
+*.kubeconfig
+admin.conf
+*.conf
+
+# SSH keys
+*.pem
+*.key
+id_rsa*
+*.pub
+
+# Logs
+*.log
+*.bak
+*.swp
+*.swo
+*~
+
+# IDE
+.vscode/
+.idea/
+*.sublime-*
+
+# OS files
+.DS_Store
+Thumbs.db
