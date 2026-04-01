@@ -22,7 +22,7 @@ variable "public_key_path" {
   default = "C:/Users/DREAD/.ssh/id_rsa.pub"
 }
 
-# Создаём бакет для картинки
+
 resource "yandex_storage_bucket" "images" {
   bucket     = "dread-images-${formatdate("YYYY-MM-DD", timestamp())}"
   folder_id  = "b1go9gufkn4ii3hfibvu"
@@ -33,7 +33,7 @@ resource "yandex_storage_bucket" "images" {
     error_document = "error.html"
   }
 }
-# Загружаем картинку в бакет
+
 resource "yandex_storage_object" "image" {
   bucket = yandex_storage_bucket.images.bucket
   key    = "test.jpg"
@@ -41,7 +41,7 @@ resource "yandex_storage_object" "image" {
   acl    = "public-read"
 }
 
-# Создаём сеть и подсети
+
 resource "yandex_vpc_network" "main" {
   name = "load-balancer-network"
 }
@@ -53,7 +53,7 @@ resource "yandex_vpc_subnet" "public" {
   v4_cidr_blocks = ["192.168.10.0/24"]
 }
 
-# Группа безопасности для ВМ
+
 resource "yandex_vpc_security_group" "web" {
   name        = "web-sg"
   network_id  = yandex_vpc_network.main.id
@@ -80,13 +80,13 @@ resource "yandex_vpc_security_group" "web" {
   }
 }
 
-# Создаём целевую группу для балансировщика
+
 resource "yandex_lb_target_group" "web_group" {
   name      = "web-target-group"
   folder_id = "b1go9gufkn4ii3hfibvu"
 }
 
-# Шаблон для Instance Group
+
 resource "yandex_compute_instance_group" "web_servers" {
   name               = "web-servers"
   folder_id          = "b1go9gufkn4ii3hfibvu"
@@ -150,7 +150,7 @@ resource "yandex_compute_instance_group" "web_servers" {
   }
 }
 
-# Network Load Balancer
+
 resource "yandex_lb_network_load_balancer" "web_lb" {
   name = "web-load-balancer"
 
@@ -178,7 +178,7 @@ resource "yandex_lb_network_load_balancer" "web_lb" {
   }
 }
 
-# Вывод информации
+
 output "bucket_url" {
   value = "https://${yandex_storage_bucket.images.bucket}.website.yandexcloud.net/${yandex_storage_object.image.key}"
 }
