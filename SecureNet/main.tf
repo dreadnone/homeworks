@@ -22,7 +22,7 @@ variable "public_key_path" {
   default = "C:/Users/DREAD/.ssh/id_rsa.pub"
 }
 
-# KMS ключ для шифрования бакета
+
 resource "yandex_kms_symmetric_key" "bucket_key" {
   name              = "bucket-encryption-key"
   description       = "Key for bucket encryption"
@@ -30,7 +30,7 @@ resource "yandex_kms_symmetric_key" "bucket_key" {
   rotation_period   = "8760h" # 1 год
 }
 
-# Бакет с шифрованием через KMS
+
 resource "yandex_storage_bucket" "images" {
   bucket     = "dread-images-${formatdate("YYYY-MM-DD", timestamp())}"
   folder_id  = "b1go9gufkn4ii3hfibvu"
@@ -46,7 +46,7 @@ resource "yandex_storage_bucket" "images" {
   }
 }
 
-# Загружаем картинку в бакет
+
 resource "yandex_storage_object" "image" {
   bucket = yandex_storage_bucket.images.bucket
   key    = "test.jpg"
@@ -54,7 +54,7 @@ resource "yandex_storage_object" "image" {
   acl    = "public-read"
 }
 
-# Вывод информации
+
 output "bucket_url" {
   value = "https://${yandex_storage_bucket.images.bucket}.website.yandexcloud.net/${yandex_storage_object.image.key}"
 }
