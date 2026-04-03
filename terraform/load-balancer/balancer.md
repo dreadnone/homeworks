@@ -46,4 +46,18 @@
 <img width="813" height="127" alt="Снимок экрана (7)" src="https://github.com/user-attachments/assets/4ad26e24-4ae1-45cf-8271-3288d376737a" />
 <img width="1233" height="768" alt="Снимок экрана (8)" src="https://github.com/user-attachments/assets/4e217f65-c13b-48c5-9212-b431be63b812" />
 
+## Балансировщик в статусе ACTIVE
+<img width="1389" height="700" alt="Снимок экрана (9)" src="https://github.com/user-attachments/assets/a11ad437-33fe-479e-8f02-b1739bc8bcba" />
+
+<img width="877" height="750" alt="Снимок экрана (10)" src="https://github.com/user-attachments/assets/db1bacef-ab10-4179-955e-03e567e7d244" />
+
+## Исходное состояние
+<img width="1670" height="330" alt="Снимок экрана (11)" src="https://github.com/user-attachments/assets/e742abbb-282f-486d-a70e-9a2fc5aafd15" />
+
+## Останавливаем одну ВМ
+<img width="1660" height="210" alt="Снимок экрана (13)" src="https://github.com/user-attachments/assets/e8d0880b-cada-49ad-b0ed-cc6e22d1be9d" />
+
+## Трафик идет через другую ВМ
+
+<img width="646" height="694" alt="Снимок экрана (12)" src="https://github.com/user-attachments/assets/a07438b7-1352-41c2-8eb0-054a00292b9a" />
 
